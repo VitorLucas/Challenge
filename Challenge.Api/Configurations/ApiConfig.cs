@@ -47,17 +47,6 @@ public static class ApiConfig
                         .WithHeaders(HeaderNames.ContentType, "Access-Control-Allow-Origin"));
         });
 
-        //var credentialsSection = configuration.GetSection("Credentials");
-        //services.Configure<Credentials>(credentialsSection);
-
-        //services.AddDbContext<BoondManagerDbContext>(option =>
-        //{
-        //    option.UseNpgsql(configuration["SyncConnectionString"])
-        //        .EnableSensitiveDataLogging();
-        //    option.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddFilter((category, level) =>
-        //       category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information)));
-        //});
-
         return services;
     }
 

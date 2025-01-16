@@ -9,14 +9,14 @@ namespace Challenge.Api.Configurations.Extensions;
 public class PollyExtensions
 {
     private static readonly List<HttpStatusCode> retriableStatusCodes = new()
-{
-        HttpStatusCode.RequestTimeout,       // 408
-        HttpStatusCode.TooManyRequests,      // 429
-        HttpStatusCode.InternalServerError,  // 500
-        HttpStatusCode.BadGateway,           // 502
-        HttpStatusCode.ServiceUnavailable,   // 503
-        HttpStatusCode.GatewayTimeout        // 504
-};
+    {
+            HttpStatusCode.RequestTimeout,       // 408
+            HttpStatusCode.TooManyRequests,      // 429
+            HttpStatusCode.InternalServerError,  // 500
+            HttpStatusCode.BadGateway,           // 502
+            HttpStatusCode.ServiceUnavailable,   // 503
+            HttpStatusCode.GatewayTimeout        // 504
+    };
 
     public static IAsyncPolicy<HttpResponseMessage> TimeoutPolicy()
     {

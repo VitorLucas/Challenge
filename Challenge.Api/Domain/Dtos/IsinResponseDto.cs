@@ -2,7 +2,7 @@
 
 namespace Challenge.Api.Domain.Dtos;
 
-public class IsinDto
+public class IsinResponseDto
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

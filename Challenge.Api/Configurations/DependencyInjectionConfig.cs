@@ -1,5 +1,7 @@
-﻿using Challenge.Application;
+﻿using Challenge.Api.Infrastructure.Repositories;
+using Challenge.Application;
 using Challenge.Application.Abstractions;
+using Challenge.Infrastructure.Abstractions;
 
 namespace Challenge.Api.Configurations;
 
@@ -18,6 +20,7 @@ public static class DependencyInjectionConfig
     {
         services.AddHttpFactoryConfiguration(configuration);
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped<ISecurityService, SecurityService>();
     }
 
     private static void Services(this IServiceCollection services)
@@ -27,6 +30,6 @@ public static class DependencyInjectionConfig
 
     private static void Repositories(this IServiceCollection services)
     {
-
+        services.AddScoped<ISecurityRepository, SecurityRepository>();
     }
 }

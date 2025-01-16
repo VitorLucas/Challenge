@@ -1,11 +1,9 @@
-﻿using Challenge.Application.Abstractions;
+﻿using Challenge.Api.Application;
+using Challenge.Api.Domain.Dtos;
+using Challenge.Application.Abstractions;
 using Challenge.Domain;
 using Challenge.Infrastructure.Abstractions;
-using Challenge.Application.Abstractions;
-using System.ComponentModel.Design;
 using System.Net;
-using Challenge.Api.Domain.Dtos;
-using Challenge.Api.Application;
 
 namespace Challenge.Application;
 
@@ -51,7 +49,7 @@ public class SecurityService : ServiceBase, ISecurityService
 
             IsinModel newModel = new IsinModel(Guid.NewGuid(), id, (decimal)priceFound.Price);
 
-            var modelInserted = await securityRepository.InsertIsinAsync(newModel);
+            var modelInserted = await _securityRepository.InsertIsinAsync(newModel);
             if (modelInserted is null)
             {
                 _logger.LogError($"Isin could not be saved  ISIN ID:{id}");
@@ -64,7 +62,7 @@ public class SecurityService : ServiceBase, ISecurityService
         return Isinslist.AsEnumerable();
     }
 
-    private async Task<IsinDto> FindIsinPriceByIdAsync(string id) 
+    private async Task<IsinResponseDto> FindIsinPriceByIdAsync(string id)
     {
         if (!string.IsNullOrEmpty(id))
         {
@@ -73,7 +71,7 @@ public class SecurityService : ServiceBase, ISecurityService
 
             if (isinResponse.StatusCode.Equals(HttpStatusCode.OK))
             {
-                var isinFound = await DeserializarObjetoResponse<IsinDto>(isinResponse);
+                var isinFound = await DeserializarObjetoResponse<IsinResponseDto>(isinResponse);
 
                 return isinFound ?? default;
             }

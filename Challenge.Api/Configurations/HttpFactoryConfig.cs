@@ -15,7 +15,7 @@ public static class HttpFactoryConfig
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         })
         .AddPolicyHandler(PollyExtensions.WaitAndRetry())
-        .AddTransientHttpErrorPolicy(s => s.CircuitBreakerAsync(3, TimeSpan.FromSeconds(15)));
+        .AddTransientHttpErrorPolicy(s => s.CircuitBreakerAsync(3, TimeSpan.FromSeconds(6)));
 
         return services;
     }

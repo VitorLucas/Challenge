@@ -1,6 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Text;
 using System.Text.Json;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Challenge.Api.Application;

@@ -1,6 +1,6 @@
-﻿using Challenge.Application.Abstractions;
+﻿using Challenge.Application;
 using Challenge.Infrastructure.Abstractions;
-using Challenge.Application;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace SecurityServiceTest
@@ -11,7 +11,8 @@ namespace SecurityServiceTest
         public SecurityServiceTest()
         {
 
-            securityService = new SecurityService(new Mock<ISecurityProviderService>().Object,
+            securityService = new SecurityService(new Mock<ILogger<SecurityService>>().Object,
+                                                    new Mock<IHttpClientFactory>().Object,
                                                    new Mock<ISecurityRepository>().Object);
         }
 
@@ -19,7 +20,7 @@ namespace SecurityServiceTest
         public async void SecurityService_GetIsinPrice_InputListEmpty()
         {
             //Arrange/act
-            var result = await securityService.GetIsinPriceAsync(new List<string>());
+            var result = await securityService.GetIsinPricesAsync(new List<string>());
 
             //Assert
             Assert.Empty(result);
@@ -29,7 +30,7 @@ namespace SecurityServiceTest
         public async void SecurityService_GetIsinPrice_InputLisNull()
         {
             //Arrange/act
-            var result = await securityService.GetIsinPriceAsync(null);
+            var result = await securityService.GetIsinPricesAsync(null);
 
             //Assert
             Assert.Empty(result);
